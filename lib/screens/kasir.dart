@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:retail_apps/models/barang.dart';
-import 'package:retail_apps/screens/checkout.dart';
 import 'package:retail_apps/widgets/belanja_item.dart';
 
 class Kasir extends StatefulWidget {
@@ -29,7 +28,7 @@ class _KasirState extends State<Kasir> {
   void addBarang(Barang barang) {
     setState(() {
       keranjang.add(barang);
-      total = total + (int.parse(barang.harga));
+      total = total + (int.parse(barang.harga) * barang.jumlah);
     });
   }
 
@@ -37,7 +36,7 @@ class _KasirState extends State<Kasir> {
     Barang barang = keranjang.where((element) => element.id == id).toList()[0];
 
     setState(() {
-      total = total - int.parse(barang.harga);
+      total = total - int.parse(barang.harga) * barang.jumlah;
       keranjang.removeWhere((element) {
         return element.id == id;
       });
@@ -67,9 +66,12 @@ class _KasirState extends State<Kasir> {
               ),
             ),
             SizedBox(height: 5),
-            Text(
-              ket,
-              style: TextStyle(color: Colors.white),
+            Container(
+              width: 200,
+              child: Text(
+                ket,
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ],
         )
@@ -106,8 +108,8 @@ class _KasirState extends State<Kasir> {
                         )),
                     SizedBox(height: 12),
                     buildContainerPelanggan(
-                        'Alamat',
-                        'Jalan Jalan',
+                        'Keterangan',
+                        'Pagar Hitam Biru asd asd asd as das',
                         Icon(
                           Icons.info_outline,
                           color: Colors.white,
@@ -123,15 +125,18 @@ class _KasirState extends State<Kasir> {
                     nama: 'Barang Baru',
                     harga: "30000",
                     tipe: 'Eceran',
-                    image: 'image'));
+                    image: 'image',
+                    jumlah: 2));
               },
-              icon: Icon(Icons.add),
-              label: Text('Tambah Barang Baru'),
+              color: Colors.green,
+              icon: Icon(Icons.add, color: Colors.white),
+              label: Text('Tambah Barang Baru',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
             ),
             Expanded(
               flex: 1,
               child: Container(
-                decoration: BoxDecoration(color: Colors.blue[50]),
                 child: Column(
                   children: <Widget>[
                     Expanded(
@@ -143,6 +148,8 @@ class _KasirState extends State<Kasir> {
                       ),
                     ),
                     Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[Text('Total:'), Text('Rp. $total')],

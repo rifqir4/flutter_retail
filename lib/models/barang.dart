@@ -6,11 +6,13 @@ class Barang {
   final String tipe;
   final String harga;
   final String image;
+  final int jumlah;
 
   Barang(
       {@required this.id,
       @required this.nama,
       @required this.harga,
       @required this.tipe,
-      @required this.image});
+      @required this.image,
+      this.jumlah});
 }

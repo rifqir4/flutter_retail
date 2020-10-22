@@ -20,15 +20,19 @@ class BelanjaItem extends StatelessWidget {
                 Text(barang.nama),
                 Row(
                   children: [
-                    Icon(Icons.circle, size: 10),
-                    Text(' ${barang.tipe}')
+                    Icon(Icons.circle, size: 10, color: Colors.green[500]),
+                    Text(' ${barang.tipe}',
+                        style: TextStyle(color: Colors.green[500]))
                   ],
                 ),
               ],
             ),
             Text('Rp. ${barang.harga}'),
             Row(
-              children: <Widget>[Icon(Icons.shopping_bag_outlined), Text(' 0')],
+              children: <Widget>[
+                Icon(Icons.shopping_bag_outlined),
+                Text(' ${barang.jumlah ?? 0}')
+              ],
             ),
             ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(5)),

@@ -6,8 +6,12 @@ class Checkout extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Barang> keranjang = ModalRoute.of(context).settings.arguments;
     print(keranjang);
-    return Container(
-      child: Text(keranjang[0].nama),
+    return Scaffold(
+      body: Container(
+        child: ListView.builder(
+            itemCount: keranjang.length,
+            itemBuilder: (context, index) => Text('${keranjang[index].nama}')),
+      ),
     );
   }
 }
