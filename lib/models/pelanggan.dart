@@ -4,11 +4,13 @@ class Pelanggan {
   final String id;
   final String nama;
   final String alamat;
+  final String telp;
   final String keterangan;
 
   Pelanggan(
       {@required this.id,
       @required this.nama,
       @required this.alamat,
+      @required this.telp,
       @required this.keterangan});
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:retail_apps/models/barang.dart';
+import 'package:retail_apps/models/pelanggan.dart';
 import 'package:retail_apps/widgets/belanja_item.dart';
 
 class Kasir extends StatefulWidget {
@@ -14,21 +15,28 @@ class _KasirState extends State<Kasir> {
         nama: 'Aqua Galon',
         harga: '25000',
         tipe: 'Grosir',
-        image: 'gambar'),
+        image: 'gambar',
+        jumlah: 2),
     Barang(
         id: '231231',
         nama: 'Beng Beng',
         harga: '5000',
         tipe: 'Grosir',
-        image: 'gambar')
+        image: 'gambar',
+        jumlah: 3)
   ];
-
-  int total = 0;
+  Pelanggan pelanggan = Pelanggan(
+      id: '123',
+      nama: 'Rifqi Radifan',
+      alamat: 'Jl. Ikan Piranha Atas',
+      telp: '081334177037',
+      keterangan: 'Didalem');
+  int total = 65000;
 
   void addBarang(Barang barang) {
     setState(() {
       keranjang.add(barang);
-      total = total + (int.parse(barang.harga) * barang.jumlah);
+      // total = total + (int.parse(barang.harga) * barang.jumlah);
     });
   }
 
@@ -114,19 +122,34 @@ class _KasirState extends State<Kasir> {
                           Icons.info_outline,
                           color: Colors.white,
                         )),
+                    Container(
+                      padding: EdgeInsets.all(2),
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.white),
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                      child: InkWell(
+                          onTap: () =>
+                              Navigator.of(context).pushNamed('/list-barang'),
+                          child: Icon(
+                            Icons.edit,
+                            color: Colors.white,
+                          )),
+                    )
                   ],
                 ),
               ),
             ),
             RaisedButton.icon(
               onPressed: () {
-                addBarang(Barang(
-                    id: '12321',
-                    nama: 'Barang Baru',
-                    harga: "30000",
-                    tipe: 'Eceran',
-                    image: 'image',
-                    jumlah: 2));
+                Navigator.of(context)
+                    .pushNamed('/list-barang')
+                    .catchError((e) => print(e))
+                    .then(
+                  (newBarang) {
+                    if (newBarang != null)
+                      addBarang((newBarang as Barang) ?? []);
+                  },
+                );
               },
               color: Colors.green,
               icon: Icon(Icons.add, color: Colors.white),
@@ -157,8 +180,12 @@ class _KasirState extends State<Kasir> {
                     ),
                     RaisedButton.icon(
                         onPressed: () {
-                          Navigator.of(context)
-                              .pushNamed('/checkout', arguments: keranjang);
+                          Navigator.of(context).pushNamed('/checkout',
+                              arguments: {
+                                'keranjang': keranjang,
+                                'pelanggan': pelanggan,
+                                'total': total
+                              });
                         },
                         icon: Icon(Icons.shopping_cart_outlined),
                         label: Text('Selesaikan Pembelanjaan'))
