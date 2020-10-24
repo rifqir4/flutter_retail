@@ -8,7 +8,10 @@ class MenuItem extends StatelessWidget {
   MenuItem({@required this.title, @required this.image, @required this.route});
 
   void selectMenu(BuildContext context) {
-    Navigator.of(context).pushNamed(route);
+    if (route == '/kasir')
+      Navigator.pushNamedAndRemoveUntil(context, '/kasir', (route) => false);
+    else
+      Navigator.of(context).pushNamed(route);
   }
 
   @override

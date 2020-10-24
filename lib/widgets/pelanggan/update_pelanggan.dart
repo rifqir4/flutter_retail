@@ -4,14 +4,17 @@ import 'package:retail_apps/models/pelanggan.dart';
 
 class UpdatePelanggan extends StatefulWidget {
   final Pelanggan pelanggan;
-  UpdatePelanggan(this.pelanggan);
+  final update;
+  UpdatePelanggan(this.pelanggan, this.update);
   @override
-  _UpdatePelangganState createState() => _UpdatePelangganState(pelanggan);
+  _UpdatePelangganState createState() =>
+      _UpdatePelangganState(pelanggan, update);
 }
 
 class _UpdatePelangganState extends State<UpdatePelanggan> {
   final Pelanggan pelanggan;
-  _UpdatePelangganState(this.pelanggan);
+  final update;
+  _UpdatePelangganState(this.pelanggan, this.update);
   final _formkey = GlobalKey<FormState>();
   String _currNama;
   String _currAlamat;
@@ -53,8 +56,14 @@ class _UpdatePelangganState extends State<UpdatePelanggan> {
             ),
             SizedBox(height: 20),
             RaisedButton(
-              child: Text('Tambah'),
+              child: Text('Update'),
               onPressed: () {
+                update(
+                    pelanggan.id,
+                    _currNama ?? pelanggan.nama,
+                    _currAlamat ?? pelanggan.alamat,
+                    _currTelp ?? pelanggan.telp,
+                    _currKet ?? pelanggan.keterangan);
                 Navigator.pop(context);
               },
             ),

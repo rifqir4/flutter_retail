@@ -9,34 +9,35 @@ class Kasir extends StatefulWidget {
 }
 
 class _KasirState extends State<Kasir> {
-  List<Barang> keranjang = [
-    Barang(
-        id: '23123',
-        nama: 'Aqua Galon',
-        harga: '25000',
-        tipe: 'Grosir',
-        image: 'gambar',
-        jumlah: 2),
-    Barang(
-        id: '231231',
-        nama: 'Beng Beng',
-        harga: '5000',
-        tipe: 'Grosir',
-        image: 'gambar',
-        jumlah: 3)
-  ];
+  // List<Barang> keranjang = [
+  //   Barang(
+  //       id: '23123',
+  //       nama: 'Aqua Galon',
+  //       harga: '25000',
+  //       tipe: 'Grosir',
+  //       image: 'gambar',
+  //       jumlah: 2),
+  //   Barang(
+  //       id: '231231',
+  //       nama: 'Beng Beng',
+  //       harga: '5000',
+  //       tipe: 'Grosir',
+  //       image: 'gambar',
+  //       jumlah: 3)
+  // ];
+  List<Barang> keranjang = [];
   Pelanggan pelanggan = Pelanggan(
       id: '123',
       nama: 'Rifqi Radifan',
       alamat: 'Jl. Ikan Piranha Atas',
       telp: '081334177037',
       keterangan: 'Didalem');
-  int total = 65000;
+  int total = 0;
 
   void addBarang(Barang barang) {
     setState(() {
       keranjang.add(barang);
-      // total = total + (int.parse(barang.harga) * barang.jumlah);
+      total = total + (int.parse(barang.harga) * barang.jumlah);
     });
   }
 
@@ -93,6 +94,13 @@ class _KasirState extends State<Kasir> {
       appBar: AppBar(
         title: Text('Keranjang Belanja'),
         backgroundColor: Colors.white,
+        actions: [
+          FlatButton.icon(
+              onPressed: () => Navigator.pushNamedAndRemoveUntil(
+                  context, '/', (route) => false),
+              icon: Icon(Icons.home_outlined),
+              label: Text('Home'))
+        ],
       ),
       body: Container(
         padding: EdgeInsets.all(20),
@@ -109,7 +117,7 @@ class _KasirState extends State<Kasir> {
                   children: [
                     buildContainerPelanggan(
                         'Alamat',
-                        'Jalan Jalan',
+                        pelanggan.alamat,
                         Icon(
                           Icons.place_outlined,
                           color: Colors.white,
@@ -117,7 +125,7 @@ class _KasirState extends State<Kasir> {
                     SizedBox(height: 12),
                     buildContainerPelanggan(
                         'Keterangan',
-                        'Pagar Hitam Biru asd asd asd as das',
+                        pelanggan.nama,
                         Icon(
                           Icons.info_outline,
                           color: Colors.white,
@@ -128,8 +136,12 @@ class _KasirState extends State<Kasir> {
                           border: Border.all(color: Colors.white),
                           borderRadius: BorderRadius.all(Radius.circular(10))),
                       child: InkWell(
-                          onTap: () =>
-                              Navigator.of(context).pushNamed('/list-barang'),
+                          onTap: () => Navigator.of(context)
+                                  .pushNamed('/list-pelanggan')
+                                  .then((value) {
+                                if (value != null)
+                                  setState(() => pelanggan = value);
+                              }),
                           child: Icon(
                             Icons.edit,
                             color: Colors.white,

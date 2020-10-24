@@ -4,14 +4,16 @@ import 'package:retail_apps/models/barang.dart';
 
 class UpdateBarang extends StatefulWidget {
   final Barang barang;
-  UpdateBarang(this.barang);
+  final update;
+  UpdateBarang(this.barang, this.update);
   @override
-  _UpdateBarangState createState() => _UpdateBarangState(barang);
+  _UpdateBarangState createState() => _UpdateBarangState(barang, update);
 }
 
 class _UpdateBarangState extends State<UpdateBarang> {
   final Barang barang;
-  _UpdateBarangState(this.barang);
+  dynamic update;
+  _UpdateBarangState(this.barang, this.update);
   final _formkey = GlobalKey<FormState>();
   String _currNama;
   String _currHarga;
@@ -52,6 +54,8 @@ class _UpdateBarangState extends State<UpdateBarang> {
             RaisedButton(
               child: Text('Update'),
               onPressed: () {
+                update(barang.id, _currNama ?? barang.nama,
+                    _currHarga ?? barang.harga, _currTipe ?? barang.tipe);
                 Navigator.pop(context);
               },
             ),

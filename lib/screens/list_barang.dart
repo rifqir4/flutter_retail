@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:retail_apps/data_dummy.dart';
+import 'package:retail_apps/screens/kasir.dart';
 
 class ListBarang extends StatefulWidget {
   @override
@@ -9,24 +10,39 @@ class ListBarang extends StatefulWidget {
 class _ListBarangState extends State<ListBarang> {
   final barangs = DATA_BARANGS;
 
-  int jumlah = 0;
+  int jumlah = 1;
 
   _createAlertDialog(BuildContext context) {
     return showDialog(
       context: context,
       builder: (contex) => StatefulBuilder(builder: (context, setState) {
+        _countHandle(bool stat) {
+          if (stat) {
+            setState(() => jumlah = jumlah + 1);
+          } else if (jumlah != 0) {
+            setState(() => jumlah = jumlah - 1);
+          }
+        }
+
         return AlertDialog(
           title: Text('Berapa ?'),
           content: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               InkWell(
-                onTap: () => setState(() => jumlah = jumlah + 1),
-                child: Text('+'),
+                onTap: () => _countHandle(true),
+                child: Container(
+                  padding: EdgeInsets.all(2),
+                  child: Icon(Icons.add),
+                ),
               ),
               Text('$jumlah'),
               InkWell(
-                onTap: () => setState(() => jumlah = jumlah - 1),
-                child: Text('-'),
+                onTap: () => _countHandle(false),
+                child: Container(
+                  padding: EdgeInsets.all(2),
+                  child: Icon(Icons.remove),
+                ),
               ),
             ],
           ),
@@ -35,7 +51,8 @@ class _ListBarangState extends State<ListBarang> {
               elevation: 5,
               child: Text('Mantap'),
               onPressed: () {
-                Navigator.of(context).pop();
+                String tes = 'haihai';
+                Navigator.of(context).pop(tes);
               },
             )
           ],
@@ -51,10 +68,14 @@ class _ListBarangState extends State<ListBarang> {
         child: ListView.builder(
           itemCount: barangs.length,
           itemBuilder: (context, index) => InkWell(
-            onTap: () {
+            onTap: () async {
               // print(barangs[index]);
               // Navigator.of(context).pop(barangs[index]);
-              _createAlertDialog(context);
+              dynamic poo = await _createAlertDialog(context);
+              setState(() {
+                barangs[index].jumlah = jumlah;
+              });
+              Navigator.of(context).pop(barangs[index]);
             },
             child: Container(
               padding: EdgeInsets.all(15),

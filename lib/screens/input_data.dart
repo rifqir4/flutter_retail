@@ -15,9 +15,13 @@ class InputData extends StatefulWidget {
 
 class _InputDataState extends State<InputData> {
   List<Pelanggan> pelanggans = DATA_PELANGGANS;
+  String search = '';
 
   @override
   Widget build(BuildContext context) {
+    final tes = pelanggans
+        .where((element) => element.nama.toLowerCase().contains(search))
+        .toList();
     void _showInputPanel(dynamic addPelanggan) {
       showModalBottomSheet(
         context: context,
@@ -30,13 +34,24 @@ class _InputDataState extends State<InputData> {
       );
     }
 
+    void _updatePelanggan(
+        String id, String nama, String alamat, String telp, String ket) {
+      final index = pelanggans.indexWhere((element) => element.id == id);
+      setState(() {
+        pelanggans[index].nama = nama;
+        pelanggans[index].alamat = alamat;
+        pelanggans[index].telp = telp;
+        pelanggans[index].keterangan = ket;
+      });
+    }
+
     void _showUpdatePanel(Pelanggan pelanggan) {
       showModalBottomSheet(
         context: context,
         builder: (context) {
           return Container(
             padding: EdgeInsets.all(15),
-            child: UpdatePelanggan(pelanggan),
+            child: UpdatePelanggan(pelanggan, _updatePelanggan),
           );
         },
       );
@@ -65,12 +80,10 @@ class _InputDataState extends State<InputData> {
           title: Text('Input Data'),
           backgroundColor: Colors.white,
           actions: [
-            FlatButton(
+            FlatButton.icon(
               onPressed: () => _showInputPanel(_addPelanggan),
-              child: Text(
-                'tekan',
-                style: TextStyle(color: Colors.black),
-              ),
+              icon: Icon(Icons.add),
+              label: Text('Tambah'),
             )
           ],
         ),
@@ -80,14 +93,15 @@ class _InputDataState extends State<InputData> {
             children: <Widget>[
               TextField(
                 decoration: textSearchDecoration.copyWith(hintText: 'Search'),
+                onChanged: (val) => setState(() => search = val),
               ),
               SizedBox(height: 10),
               Expanded(
                 flex: 1,
                 child: ListView.builder(
-                  itemCount: pelanggans.length,
+                  itemCount: tes.length,
                   itemBuilder: (contex, index) => PelangganItem(
-                      pelanggans[index], _deletePelanggan, _showUpdatePanel),
+                      tes[index], _deletePelanggan, _showUpdatePanel),
                 ),
               )
             ],

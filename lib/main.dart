@@ -5,6 +5,7 @@ import 'package:retail_apps/screens/input_barang.dart';
 import 'package:retail_apps/screens/input_data.dart';
 import 'package:retail_apps/screens/kasir.dart';
 import 'package:retail_apps/screens/list_barang.dart';
+import 'package:retail_apps/screens/list_pelanggan.dart';
 
 void main() {
   runApp(MyApp());
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         '/input-data': (context) => InputData(),
         '/checkout': (context) => Checkout(),
         '/list-barang': (context) => ListBarang(),
+        '/list-pelanggan': (context) => ListPelanggan()
       },
     );
   }

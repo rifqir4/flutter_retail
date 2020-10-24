@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:retail_apps/models/barang.dart';
 import 'package:retail_apps/models/pelanggan.dart';
+import 'package:retail_apps/screens/home.dart';
+import 'package:retail_apps/screens/kasir.dart';
 
 class Checkout extends StatelessWidget {
   @override
@@ -28,7 +30,7 @@ class Checkout extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        keranjang[index].nama,
+                        '${keranjang[index].nama} (${keranjang[index].tipe})',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       SizedBox(height: 5),
@@ -55,7 +57,7 @@ class Checkout extends StatelessWidget {
                   Text(pelanggan.alamat),
                   SizedBox(height: 10),
                   Text('Keterangan'),
-                  Text(pelanggan.keterangan),
+                  Text(pelanggan.nama),
                   SizedBox(height: 10),
                   Divider(),
                   Row(
@@ -75,7 +77,11 @@ class Checkout extends StatelessWidget {
                         icon: Icon(Icons.check_box_outlined),
                         label: Text('Selesai'),
                         color: Colors.green,
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(builder: (context) => Kasir()),
+                              (route) => false);
+                        },
                       ),
                     ],
                   ),

@@ -7,6 +7,8 @@ import 'package:retail_apps/widgets/barang/barang_item.dart';
 import 'package:retail_apps/widgets/barang/form_barang.dart';
 import 'package:retail_apps/widgets/barang/update_barang.dart';
 
+import '../constant.dart';
+
 class InputBarang extends StatefulWidget {
   @override
   _InputBarangState createState() => _InputBarangState();
@@ -14,9 +16,13 @@ class InputBarang extends StatefulWidget {
 
 class _InputBarangState extends State<InputBarang> {
   List<Barang> barangs = DATA_BARANGS;
+  String search = '';
 
   @override
   Widget build(BuildContext context) {
+    final tes = barangs
+        .where((element) => element.nama.toLowerCase().contains(search))
+        .toList();
     void _showInputPanel(dynamic addBarang) {
       showModalBottomSheet(
         context: context,
@@ -29,13 +35,23 @@ class _InputBarangState extends State<InputBarang> {
       );
     }
 
+    void _updateBarang(String id, String nama, String harga, String tipe) {
+      final index = barangs.indexWhere((element) => element.id == id);
+      setState(() {
+        barangs[index].nama = nama;
+        barangs[index].harga = harga;
+        barangs[index].tipe = tipe;
+      });
+      print(nama);
+    }
+
     void _showUpdatePanel(Barang barang) {
       showModalBottomSheet(
         context: context,
         builder: (context) {
           return Container(
             padding: EdgeInsets.all(15),
-            child: UpdateBarang(barang),
+            child: UpdateBarang(barang, _updateBarang),
           );
         },
       );
@@ -64,12 +80,10 @@ class _InputBarangState extends State<InputBarang> {
           title: Text('Input Barang'),
           backgroundColor: Colors.white,
           actions: [
-            FlatButton(
+            FlatButton.icon(
               onPressed: () => _showInputPanel(_addBarang),
-              child: Text(
-                'tekan',
-                style: TextStyle(color: Colors.black),
-              ),
+              icon: Icon(Icons.add),
+              label: Text('Tambah'),
             )
           ],
         ),
@@ -77,13 +91,17 @@ class _InputBarangState extends State<InputBarang> {
           padding: EdgeInsets.all(20),
           child: Column(
             children: <Widget>[
-              Text('Search'),
+              TextField(
+                decoration: textSearchDecoration.copyWith(hintText: 'Search'),
+                onChanged: (val) => setState(() => search = val),
+              ),
+              SizedBox(height: 10),
               Expanded(
                 flex: 1,
                 child: ListView.builder(
-                  itemCount: barangs.length,
-                  itemBuilder: (contex, index) => BarangItem(
-                      barangs[index], _deleteBarang, _showUpdatePanel),
+                  itemCount: tes.length,
+                  itemBuilder: (contex, index) =>
+                      BarangItem(tes[index], _deleteBarang, _showUpdatePanel),
                 ),
               )
             ],

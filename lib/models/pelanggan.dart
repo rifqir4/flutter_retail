@@ -2,10 +2,10 @@ import 'package:flutter/foundation.dart';
 
 class Pelanggan {
   final String id;
-  final String nama;
-  final String alamat;
-  final String telp;
-  final String keterangan;
+  String nama;
+  String alamat;
+  String telp;
+  String keterangan;
 
   Pelanggan(
       {@required this.id,
