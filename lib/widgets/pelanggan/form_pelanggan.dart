@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:retail_apps/constant.dart';
+import 'package:retail_apps/services/database.dart';
 
 class FormPelanggan extends StatefulWidget {
   final dynamic addPelanggan;
@@ -49,8 +50,10 @@ class _FormPelangganState extends State<FormPelanggan> {
             SizedBox(height: 20),
             RaisedButton(
               child: Text('Tambah'),
-              onPressed: () {
-                addPelanggan(_currNama, _currAlamat, _currTelp, _currKet);
+              onPressed: () async {
+                //addPelanggan(_currNama, _currAlamat, _currTelp, _currKet);
+                await DatabaseService().addDataPelanggan(
+                    _currNama, _currAlamat, _currTelp, _currKet);
                 Navigator.pop(context);
               },
             ),

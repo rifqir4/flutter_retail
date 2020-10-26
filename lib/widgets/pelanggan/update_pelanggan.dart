@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:retail_apps/constant.dart';
 import 'package:retail_apps/models/pelanggan.dart';
+import 'package:retail_apps/services/database.dart';
 
 class UpdatePelanggan extends StatefulWidget {
   final Pelanggan pelanggan;
@@ -58,7 +59,14 @@ class _UpdatePelangganState extends State<UpdatePelanggan> {
             RaisedButton(
               child: Text('Update'),
               onPressed: () {
-                update(
+                // update(
+                //     pelanggan.id,
+                //     _currNama ?? pelanggan.nama,
+                //     _currAlamat ?? pelanggan.alamat,
+                //     _currTelp ?? pelanggan.telp,
+                //     _currKet ?? pelanggan.keterangan);
+
+                DatabaseService().updateDataPelanggan(
                     pelanggan.id,
                     _currNama ?? pelanggan.nama,
                     _currAlamat ?? pelanggan.alamat,

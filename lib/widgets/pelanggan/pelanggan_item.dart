@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:retail_apps/models/pelanggan.dart';
+import 'package:retail_apps/services/database.dart';
 
 class PelangganItem extends StatelessWidget {
   final Pelanggan pelanggan;
@@ -48,7 +49,8 @@ class PelangganItem extends StatelessWidget {
                     color: Colors.red[100],
                     child: InkWell(
                       onTap: () {
-                        delete(pelanggan.id);
+                        //delete(pelanggan.id);
+                        DatabaseService().deleteDataPelanggan(pelanggan.id);
                       },
                       child: Icon(Icons.delete_outline),
                     ),

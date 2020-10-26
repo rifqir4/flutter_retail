@@ -1,12 +1,26 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:retail_apps/constant.dart';
 import 'package:retail_apps/data_dummy.dart';
 import 'package:retail_apps/models/pelanggan.dart';
+import 'package:retail_apps/services/database.dart';
 import 'package:retail_apps/widgets/pelanggan/form_pelanggan.dart';
 import 'package:retail_apps/widgets/pelanggan/pelanggan_item.dart';
 import 'package:retail_apps/widgets/pelanggan/update_pelanggan.dart';
+
+class InputDataWrapper extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: StreamProvider.value(
+        value: DatabaseService().pelanggans,
+        child: InputData(),
+      ),
+    );
+  }
+}
 
 class InputData extends StatefulWidget {
   @override
@@ -14,11 +28,12 @@ class InputData extends StatefulWidget {
 }
 
 class _InputDataState extends State<InputData> {
-  List<Pelanggan> pelanggans = DATA_PELANGGANS;
+  //List<Pelanggan> pelanggans = DATA_PELANGGANS;
   String search = '';
 
   @override
   Widget build(BuildContext context) {
+    final pelanggans = Provider.of<List<Pelanggan>>(context) ?? [];
     final tes = pelanggans
         .where((element) => element.nama.toLowerCase().contains(search))
         .toList();

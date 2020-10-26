@@ -1,6 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:retail_apps/data_dummy.dart';
+import 'package:retail_apps/models/barang.dart';
 import 'package:retail_apps/screens/kasir.dart';
+import 'package:retail_apps/services/database.dart';
+
+class ListBarangWrapper extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: StreamProvider.value(
+        value: DatabaseService().barangs,
+        child: ListBarang(),
+      ),
+    );
+  }
+}
 
 class ListBarang extends StatefulWidget {
   @override
@@ -8,7 +23,7 @@ class ListBarang extends StatefulWidget {
 }
 
 class _ListBarangState extends State<ListBarang> {
-  final barangs = DATA_BARANGS;
+  // final barangs = DATA_BARANGS;
 
   int jumlah = 1;
 
@@ -63,6 +78,8 @@ class _ListBarangState extends State<ListBarang> {
 
   @override
   Widget build(BuildContext context) {
+    final barangs = Provider.of<List<Barang>>(context);
+
     return Scaffold(
       body: Container(
         child: ListView.builder(

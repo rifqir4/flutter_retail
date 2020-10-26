@@ -1,10 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:retail_apps/data_dummy.dart';
+import 'package:retail_apps/models/pelanggan.dart';
+import 'package:retail_apps/services/database.dart';
+
+class ListPelangganWrapper extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: StreamProvider.value(
+        value: DatabaseService().pelanggans,
+        child: ListPelanggan(),
+      ),
+    );
+  }
+}
 
 class ListPelanggan extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final pelanggans = DATA_PELANGGANS;
+    // final pelanggans = DATA_PELANGGANS;
+    final pelanggans = Provider.of<List<Pelanggan>>(context);
 
     return Scaffold(
       body: Container(

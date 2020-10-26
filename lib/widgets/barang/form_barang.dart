@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:retail_apps/constant.dart';
+import 'package:retail_apps/services/database.dart';
 
 class FormBarang extends StatefulWidget {
   final dynamic addBarang;
@@ -49,7 +50,9 @@ class _FormBarangState extends State<FormBarang> {
             RaisedButton(
               child: Text('Tambah'),
               onPressed: () {
-                addBarang(_currNama, _currHarga, _currTipe ?? 'Eceran');
+                //addBarang(_currNama, _currHarga, _currTipe ?? 'Eceran');
+                DatabaseService().addDataBarang(
+                    _currNama, _currHarga, _currTipe, 'adada', 0);
                 Navigator.pop(context);
               },
             ),

@@ -27,11 +27,11 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => Home(),
         '/kasir': (context) => Kasir(),
-        '/input-barang': (context) => InputBarang(),
-        '/input-data': (context) => InputData(),
+        '/input-barang': (context) => InputBarangWrapper(),
+        '/input-data': (context) => InputDataWrapper(),
         '/checkout': (context) => Checkout(),
-        '/list-barang': (context) => ListBarang(),
-        '/list-pelanggan': (context) => ListPelanggan()
+        '/list-barang': (context) => ListBarangWrapper(),
+        '/list-pelanggan': (context) => ListPelangganWrapper()
       },
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:retail_apps/constant.dart';
 import 'package:retail_apps/models/barang.dart';
+import 'package:retail_apps/services/database.dart';
 
 class UpdateBarang extends StatefulWidget {
   final Barang barang;
@@ -53,9 +54,14 @@ class _UpdateBarangState extends State<UpdateBarang> {
             SizedBox(height: 20),
             RaisedButton(
               child: Text('Update'),
-              onPressed: () {
-                update(barang.id, _currNama ?? barang.nama,
-                    _currHarga ?? barang.harga, _currTipe ?? barang.tipe);
+              onPressed: () async {
+                // update(barang.id, _currNama ?? barang.nama,
+                //     _currHarga ?? barang.harga, _currTipe ?? barang.tipe);
+                await DatabaseService().updateDataBarang(
+                    barang.id,
+                    _currNama ?? barang.nama,
+                    _currHarga ?? barang.harga,
+                    _currTipe ?? barang.tipe);
                 Navigator.pop(context);
               },
             ),
