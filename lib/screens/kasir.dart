@@ -105,6 +105,7 @@ class _KasirState extends State<Kasir> {
       body: Container(
         padding: EdgeInsets.all(20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
             Container(
               decoration: BoxDecoration(
@@ -113,62 +114,75 @@ class _KasirState extends State<Kasir> {
               ),
               child: Padding(
                 padding: EdgeInsets.all(20),
-                child: Column(
+                child: Stack(
                   children: [
-                    buildContainerPelanggan(
-                        'Alamat',
-                        pelanggan.alamat,
-                        Icon(
-                          Icons.place_outlined,
-                          color: Colors.white,
-                        )),
-                    SizedBox(height: 12),
-                    buildContainerPelanggan(
-                        'Keterangan',
-                        pelanggan.nama,
-                        Icon(
-                          Icons.info_outline,
-                          color: Colors.white,
-                        )),
-                    Container(
-                      padding: EdgeInsets.all(2),
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.white),
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
-                      child: InkWell(
-                          onTap: () => Navigator.of(context)
-                                  .pushNamed('/list-pelanggan')
-                                  .then((value) {
-                                if (value != null)
-                                  setState(() => pelanggan = value);
-                              }),
-                          child: Icon(
-                            Icons.edit,
-                            color: Colors.white,
-                          )),
+                    Column(
+                      children: [
+                        buildContainerPelanggan(
+                            'Alamat',
+                            pelanggan.alamat,
+                            Icon(
+                              Icons.place_outlined,
+                              color: Colors.white,
+                            )),
+                        SizedBox(height: 12),
+                        buildContainerPelanggan(
+                            'Keterangan',
+                            pelanggan.nama,
+                            Icon(
+                              Icons.info_outline,
+                              color: Colors.white,
+                            )),
+                      ],
+                    ),
+                    Positioned(
+                      top: 30,
+                      right: 10,
+                      child: Container(
+                        padding: EdgeInsets.all(2),
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.white),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
+                        child: InkWell(
+                            onTap: () => Navigator.of(context)
+                                    .pushNamed('/list-pelanggan')
+                                    .then((value) {
+                                  if (value != null)
+                                    setState(() => pelanggan = value);
+                                }),
+                            child: Icon(
+                              Icons.edit,
+                              color: Colors.white,
+                            )),
+                      ),
                     )
                   ],
                 ),
               ),
             ),
-            RaisedButton.icon(
-              onPressed: () {
-                Navigator.of(context)
-                    .pushNamed('/list-barang')
-                    .catchError((e) => print(e))
-                    .then(
-                  (newBarang) {
-                    if (newBarang != null)
-                      addBarang((newBarang as Barang) ?? []);
-                  },
-                );
-              },
-              color: Colors.green,
-              icon: Icon(Icons.add, color: Colors.white),
-              label: Text('Tambah Barang Baru',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white)),
-            ),
+            RaisedButton(
+                onPressed: () {
+                  Navigator.of(context)
+                      .pushNamed('/list-barang')
+                      .catchError((e) => print(e))
+                      .then(
+                    (newBarang) {
+                      if (newBarang != null)
+                        addBarang((newBarang as Barang) ?? []);
+                    },
+                  );
+                },
+                color: Colors.green,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Text('Tambah Barang Baru',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.white)),
+                    Icon(Icons.add, color: Colors.white),
+                  ],
+                )),
             Expanded(
               flex: 1,
               child: Container(
