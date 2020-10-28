@@ -27,9 +27,12 @@ class ListPelanggan extends StatelessWidget {
         child: ListView.builder(
           itemCount: pelanggans.length,
           itemBuilder: (context, index) => Container(
-            decoration: BoxDecoration(color: Colors.blue),
-            margin: EdgeInsets.all(10),
             padding: EdgeInsets.all(15),
+            height: 50,
+            decoration: BoxDecoration(
+                color: Colors.blue[200],
+                border: Border.all(color: Colors.white),
+                borderRadius: BorderRadius.all(Radius.circular(10))),
             child: InkWell(
               onTap: () {
                 Navigator.of(context).pop(pelanggans[index]);

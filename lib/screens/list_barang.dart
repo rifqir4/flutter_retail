@@ -40,7 +40,7 @@ class _ListBarangState extends State<ListBarang> {
         }
 
         return AlertDialog(
-          title: Text('Berapa ?'),
+          title: Text('Masukkan Jumlah yang Diinginkan'),
           content: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -64,7 +64,7 @@ class _ListBarangState extends State<ListBarang> {
           actions: [
             MaterialButton(
               elevation: 5,
-              child: Text('Mantap'),
+              child: Text('Tambahkan Data'),
               onPressed: () {
                 String tes = 'haihai';
                 Navigator.of(context).pop(tes);
