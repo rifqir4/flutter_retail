@@ -40,6 +40,7 @@ class _InputDataState extends State<InputData> {
     void _showInputPanel(dynamic addPelanggan) {
       showModalBottomSheet(
         context: context,
+        isScrollControlled: true,
         builder: (context) {
           return Container(
             padding: EdgeInsets.all(15),
@@ -63,6 +64,7 @@ class _InputDataState extends State<InputData> {
     void _showUpdatePanel(Pelanggan pelanggan) {
       showModalBottomSheet(
         context: context,
+        isScrollControlled: true,
         builder: (context) {
           return Container(
             padding: EdgeInsets.all(15),

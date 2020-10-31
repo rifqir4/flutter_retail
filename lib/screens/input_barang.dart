@@ -41,6 +41,7 @@ class _InputBarangState extends State<InputBarang> {
     void _showInputPanel(dynamic addBarang) {
       showModalBottomSheet(
         context: context,
+        isScrollControlled: true,
         builder: (context) {
           return Container(
             padding: EdgeInsets.all(15),
@@ -63,6 +64,7 @@ class _InputBarangState extends State<InputBarang> {
     void _showUpdatePanel(Barang barang) {
       showModalBottomSheet(
         context: context,
+        isScrollControlled: true,
         builder: (context) {
           return Container(
             padding: EdgeInsets.all(15),
