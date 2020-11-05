@@ -23,32 +23,34 @@ class ListPelanggan extends StatelessWidget {
     final pelanggans = Provider.of<List<Pelanggan>>(context);
 
     return Scaffold(
-      body: Container(
-        child: ListView.builder(
-          itemCount: pelanggans.length,
-          itemBuilder: (context, index) => Container(
-            padding: EdgeInsets.all(15),
-            height: 50,
-            decoration: BoxDecoration(
-                color: Colors.blue[200],
-                border: Border.all(color: Colors.white),
-                borderRadius: BorderRadius.all(Radius.circular(10))),
-            child: InkWell(
-              onTap: () {
-                Navigator.of(context).pop(pelanggans[index]);
-              },
-              child: Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text('${pelanggans[index].nama}'),
-                  ],
+      body: pelanggans != null
+          ? Container(
+              child: ListView.builder(
+                itemCount: pelanggans.length,
+                itemBuilder: (context, index) => Container(
+                  padding: EdgeInsets.all(15),
+                  height: 50,
+                  decoration: BoxDecoration(
+                      color: Colors.blue[200],
+                      border: Border.all(color: Colors.white),
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).pop(pelanggans[index]);
+                    },
+                    child: Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text('${pelanggans[index].nama}'),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ),
-        ),
-      ),
+            )
+          : Center(child: Text('Loading')),
     );
   }
 }

@@ -78,49 +78,51 @@ class _ListBarangState extends State<ListBarang> {
 
   @override
   Widget build(BuildContext context) {
-    final barangs = Provider.of<List<Barang>>(context);
+    List barangs = Provider.of<List<Barang>>(context);
 
     return Scaffold(
-      body: Container(
-        child: ListView.builder(
-          itemCount: barangs.length,
-          itemBuilder: (context, index) => InkWell(
-            onTap: () async {
-              // print(barangs[index]);
-              // Navigator.of(context).pop(barangs[index]);
-              dynamic poo = await _createAlertDialog(context);
-              setState(() {
-                barangs[index].jumlah = jumlah;
-              });
-              Navigator.of(context).pop(barangs[index]);
-            },
-            child: Container(
-              padding: EdgeInsets.all(15),
-              margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-              decoration: BoxDecoration(
-                color: Colors.blue[50],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    barangs[index].nama,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+      body: barangs != null
+          ? Container(
+              child: ListView.builder(
+                itemCount: barangs.length ?? 0,
+                itemBuilder: (context, index) => InkWell(
+                  onTap: () async {
+                    // print(barangs[index]);
+                    // Navigator.of(context).pop(barangs[index]);
+                    dynamic poo = await _createAlertDialog(context);
+                    setState(() {
+                      barangs[index].jumlah = jumlah;
+                    });
+                    Navigator.of(context).pop(barangs[index]);
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(15),
+                    margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                    decoration: BoxDecoration(
+                      color: Colors.blue[50],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          barangs[index].nama,
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 5),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text('Rp. ${barangs[index].harga}'),
+                            Text('Tipe: ${barangs[index].tipe}')
+                          ],
+                        )
+                      ],
+                    ),
                   ),
-                  SizedBox(height: 5),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text('Rp. ${barangs[index].harga}'),
-                      Text('Tipe: ${barangs[index].tipe}')
-                    ],
-                  )
-                ],
+                ),
               ),
-            ),
-          ),
-        ),
-      ),
+            )
+          : Center(child: Text("Loading..")),
     );
   }
 }

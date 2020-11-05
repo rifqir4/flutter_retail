@@ -35,10 +35,20 @@ class _KasirState extends State<Kasir> {
   int total = 0;
 
   void addBarang(Barang barang) {
-    setState(() {
-      keranjang.add(barang);
-      total = total + (int.parse(barang.harga) * barang.jumlah);
-    });
+    int contain = keranjang.isNotEmpty
+        ? keranjang.indexWhere((element) => element.id == barang.id)
+        : null;
+    if (contain != null && contain != -1) {
+      setState(() {
+        keranjang[contain].jumlah = keranjang[contain].jumlah + barang.jumlah;
+        total = total + (int.parse(barang.harga) * barang.jumlah);
+      });
+    } else {
+      setState(() {
+        keranjang.add(barang);
+        total = total + (int.parse(barang.harga) * barang.jumlah);
+      });
+    }
   }
 
   void deleteBarang(String id) {

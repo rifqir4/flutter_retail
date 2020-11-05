@@ -44,7 +44,7 @@ class _InputBarangState extends State<InputBarang> {
         isScrollControlled: true,
         builder: (context) {
           return Container(
-            padding: EdgeInsets.all(15),
+            padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 50.0),
             child: FormBarang(addBarang),
           );
         },
