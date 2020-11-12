@@ -48,18 +48,18 @@ class _ListBarangState extends State<ListBarang> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               InkWell(
-                onTap: () => _countHandle(true),
-                child: Container(
-                  padding: EdgeInsets.all(2),
-                  child: Icon(Icons.add),
-                ),
-              ),
-              Text('$jumlah'),
-              InkWell(
                 onTap: () => _countHandle(false),
                 child: Container(
                   padding: EdgeInsets.all(2),
                   child: Icon(Icons.remove),
+                ),
+              ),
+              Text('$jumlah'),
+              InkWell(
+                onTap: () => _countHandle(true),
+                child: Container(
+                  padding: EdgeInsets.all(2),
+                  child: Icon(Icons.add),
                 ),
               ),
             ],

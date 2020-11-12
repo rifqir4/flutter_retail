@@ -31,10 +31,10 @@ class Home extends StatelessWidget {
           children: <Widget>[
             Container(
               width: 300,
-              child: Image.asset('assets/images/welcome.png'),
+              child: Image.asset('assets/images/logo.png'),
             ),
             Text(
-              'Toko Ada Serbaguna',
+              'Toko Solo Makmur',
               style: TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
@@ -51,7 +51,31 @@ class Home extends StatelessWidget {
                       Icon(Icons.place_outlined),
                       SizedBox(width: 6),
                       Text(
-                        'Jalan Akik 10 Tlogomas',
+                        'Jl. Kasuari Raya no. 256',
+                        style: TextStyle(fontSize: 20),
+                        softWrap: true,
+                        overflow: TextOverflow.visible,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      SizedBox(width: 6),
+                      Text(
+                        'Perumnas 1, Kayuringin Jaya',
+                        style: TextStyle(fontSize: 20),
+                        softWrap: true,
+                        overflow: TextOverflow.visible,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      SizedBox(width: 6),
+                      Text(
+                        'Bekasi Selatan, Kota Bekasi, 17144',
                         style: TextStyle(fontSize: 20),
                         softWrap: true,
                         overflow: TextOverflow.visible,
@@ -65,7 +89,7 @@ class Home extends StatelessWidget {
                       Icon(Icons.phone_outlined),
                       SizedBox(width: 6),
                       Text(
-                        '081334177037',
+                        '021-8868068',
                         style: TextStyle(fontSize: 20),
                       ),
                     ],
