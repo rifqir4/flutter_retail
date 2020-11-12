@@ -25,27 +25,45 @@ class _FormPelangganState extends State<FormPelanggan> {
         child: Column(
           children: [
             Text("Tambah Data Pelanggan Baru", style: TextStyle(fontSize: 18)),
-            SizedBox(height: 10),
+            SizedBox(height: 30),
             TextFormField(
-              decoration:
-                  textInputDecoration.copyWith(hintText: 'Nama Pelanggan'),
-              onChanged: (val) => setState(() => _currNama = val),
+              decoration: textInputDecoration.copyWith(
+                  labelText: 'Nama Pelanggan',
+                  suffixIcon: Icon(
+                    Icons.account_box_outlined,
+                    color: Colors.black,
+                  )),
+              onChanged: (val) => _currNama = val,
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 15),
             TextFormField(
-              decoration:
-                  textInputDecoration.copyWith(hintText: 'Alamat Pelanggan'),
-              onChanged: (val) => setState(() => _currAlamat = val),
+              decoration: textInputDecoration.copyWith(
+                  labelText: 'Alamat Pelanggan',
+                  suffixIcon: Icon(
+                    Icons.pin_drop_outlined,
+                    color: Colors.black,
+                  )),
+              onChanged: (val) => _currAlamat = val,
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 15),
             TextFormField(
-              decoration: textInputDecoration.copyWith(hintText: 'Nomor Telp'),
-              onChanged: (val) => setState(() => _currTelp = val),
+              decoration: textInputDecoration.copyWith(
+                  labelText: 'Nomor Telp',
+                  suffixIcon: Icon(
+                    Icons.phone,
+                    color: Colors.black,
+                  )),
+              onChanged: (val) => _currTelp = val,
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 15),
             TextFormField(
-              decoration: textInputDecoration.copyWith(hintText: 'Keterangan'),
-              onChanged: (val) => setState(() => _currKet = val),
+              decoration: textInputDecoration.copyWith(
+                  labelText: 'Keterangan',
+                  suffixIcon: Icon(
+                    Icons.info_outline,
+                    color: Colors.black,
+                  )),
+              onChanged: (val) => _currKet = val,
             ),
             SizedBox(height: 20),
             RaisedButton(

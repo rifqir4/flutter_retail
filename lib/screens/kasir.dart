@@ -102,7 +102,10 @@ class _KasirState extends State<Kasir> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Keranjang Belanja'),
+        title: Text(
+          'Keranjang Belanja',
+          style: TextStyle(color: Colors.black),
+        ),
         backgroundColor: Colors.white,
         actions: [
           FlatButton.icon(

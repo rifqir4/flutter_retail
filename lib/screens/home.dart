@@ -19,10 +19,13 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Beranda'),
+        title: Text(
+          'Beranda',
+          style: TextStyle(color: Colors.black),
+        ),
         backgroundColor: Colors.white,
       ),
-      body: Center(
+      body: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[

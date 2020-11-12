@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:retail_apps/models/barang.dart';
+import 'package:retail_apps/models/kategori.dart';
 import 'package:retail_apps/models/pelanggan.dart';
 
 class DatabaseService {
@@ -7,6 +8,8 @@ class DatabaseService {
       Firestore.instance.collection('barang');
   final CollectionReference pelangganCollection =
       Firestore.instance.collection('pelanggan');
+  final CollectionReference kategoriCollection =
+      Firestore.instance.collection('kategori');
 
   List<Barang> _barangListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
@@ -26,12 +29,14 @@ class DatabaseService {
   }
 
   //add data barang
-  Future addDataBarang(
-      String nama, String harga, String tipe, String image, int jumlah) async {
+  Future addDataBarang(String nama, String harga, String tipe, String kategori,
+      String image, int jumlah, bool katStat) async {
+    if (katStat) await kategoriCollection.add({'nama': kategori});
     return await barangCollection.add({
       'nama': nama,
       'harga': harga,
       'tipe': tipe,
+      'kategori': kategori,
       'image': image,
       'jumlah': jumlah
     });
@@ -85,5 +90,15 @@ class DatabaseService {
       'telp': telp,
       'keterangan': keterangan
     });
+  }
+
+  List<Kategori> _kategoriListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.documents.map((doc) {
+      return Kategori(id: doc.documentID, nama: doc.data['nama'] ?? '');
+    }).toList();
+  }
+
+  Stream<List<Kategori>> get kategoris {
+    return kategoriCollection.snapshots().map(_kategoriListFromSnapshot);
   }
 }

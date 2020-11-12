@@ -29,9 +29,10 @@ class BarangItem extends StatelessWidget {
                 ),
               ],
             ),
-            Text('Rp. ${barang.harga}'),
             Row(
               children: <Widget>[
+                Text('Rp. ${barang.harga}'),
+                SizedBox(width: 20),
                 ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(5)),
                   child: Container(

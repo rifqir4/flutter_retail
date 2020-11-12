@@ -94,7 +94,11 @@ class _InputDataState extends State<InputData> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text('Input Data'),
+          leading: BackButton(color: Colors.black),
+          title: Text(
+            'Input Data',
+            style: TextStyle(color: Colors.black),
+          ),
           backgroundColor: Colors.white,
           actions: [
             FlatButton.icon(

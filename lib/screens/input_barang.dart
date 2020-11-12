@@ -94,7 +94,11 @@ class _InputBarangState extends State<InputBarang> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text('Input Barang'),
+          leading: BackButton(color: Colors.black),
+          title: Text(
+            'Input Barang',
+            style: TextStyle(color: Colors.black),
+          ),
           backgroundColor: Colors.white,
           actions: [
             FlatButton.icon(
