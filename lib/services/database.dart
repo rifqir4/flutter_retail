@@ -18,6 +18,7 @@ class DatabaseService {
         nama: doc.data['nama'] ?? '',
         harga: doc.data['harga'] ?? '0',
         tipe: doc.data['tipe'] ?? '',
+        kategori: doc.data['kategori'] ?? '',
         image: doc.data['image'] ?? '',
         jumlah: doc.data['jumlah'] ?? 0,
       );

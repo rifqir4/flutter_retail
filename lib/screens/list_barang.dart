@@ -8,16 +8,19 @@ import 'package:retail_apps/services/database.dart';
 class ListBarangWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    String kategori = ModalRoute.of(context).settings.arguments as String;
     return Container(
       child: StreamProvider.value(
         value: DatabaseService().barangs,
-        child: ListBarang(),
+        child: ListBarang(kategori),
       ),
     );
   }
 }
 
 class ListBarang extends StatefulWidget {
+  String kategori;
+  ListBarang(this.kategori);
   @override
   _ListBarangState createState() => _ListBarangState();
 }
@@ -78,7 +81,13 @@ class _ListBarangState extends State<ListBarang> {
 
   @override
   Widget build(BuildContext context) {
-    List barangs = Provider.of<List<Barang>>(context);
+    print(widget.kategori);
+    List<Barang> barangsFull = Provider.of<List<Barang>>(context);
+    List<Barang> barangs = barangsFull != null
+        ? barangsFull
+            .where((element) => element.kategori == widget.kategori)
+            .toList()
+        : [];
 
     return Scaffold(
       body: barangs != null
@@ -90,10 +99,12 @@ class _ListBarangState extends State<ListBarang> {
                     // print(barangs[index]);
                     // Navigator.of(context).pop(barangs[index]);
                     dynamic poo = await _createAlertDialog(context);
-                    setState(() {
-                      barangs[index].jumlah = jumlah;
-                    });
-                    Navigator.of(context).pop(barangs[index]);
+                    if (poo != null) {
+                      setState(() {
+                        barangs[index].jumlah = jumlah;
+                      });
+                      Navigator.of(context).pop(barangs[index]);
+                    }
                   },
                   child: Container(
                     padding: EdgeInsets.all(15),

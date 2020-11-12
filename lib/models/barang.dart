@@ -5,6 +5,7 @@ class Barang {
   String nama;
   String tipe;
   String harga;
+  String kategori;
   String image;
   int jumlah;
 
@@ -13,6 +14,7 @@ class Barang {
       @required this.nama,
       @required this.harga,
       @required this.tipe,
+      @required this.kategori,
       @required this.image,
       this.jumlah});
 }

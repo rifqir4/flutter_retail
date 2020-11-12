@@ -182,7 +182,7 @@ class _KasirState extends State<Kasir> {
                   RaisedButton(
                     onPressed: () {
                       Navigator.of(context)
-                          .pushNamed('/list-barang')
+                          .pushNamed('/list-kategori')
                           .catchError((e) => print(e))
                           .then(
                         (newBarang) {
