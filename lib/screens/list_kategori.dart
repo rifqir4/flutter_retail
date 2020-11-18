@@ -26,7 +26,7 @@ class ListKategori extends StatelessWidget {
                       onPressed: () async {
                         Barang barangs = await Navigator.of(context)
                             .pushNamed('/list-barang',
-                                arguments: listKategori[index].nama)
+                                arguments: listKategori[index].id)
                             .catchError((e) => print(e));
                         if (barangs != null) Navigator.of(context).pop(barangs);
                       },
