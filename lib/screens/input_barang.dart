@@ -7,6 +7,7 @@ import 'package:retail_apps/models/barang.dart';
 import 'package:retail_apps/services/database.dart';
 import 'package:retail_apps/widgets/barang/barang_item.dart';
 import 'package:retail_apps/widgets/barang/form_barang.dart';
+import 'package:retail_apps/widgets/barang/get_kategori.dart';
 import 'package:retail_apps/widgets/barang/update_barang.dart';
 
 import '../constant.dart';
@@ -45,7 +46,7 @@ class _InputBarangState extends State<InputBarang> {
         builder: (context) {
           return Container(
             padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 50.0),
-            child: FormBarang(addBarang),
+            child: GetKategori(addBarang),
           );
         },
       );
@@ -68,7 +69,7 @@ class _InputBarangState extends State<InputBarang> {
         builder: (context) {
           return Container(
             padding: EdgeInsets.all(15),
-            child: UpdateBarang(barang, _updateBarang),
+            child: GetKategoriUpdate(barang, _updateBarang),
           );
         },
       );

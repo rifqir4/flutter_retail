@@ -47,11 +47,10 @@ class DatabaseService {
     await barangCollection.document(id).delete();
   }
 
-  Future updateDataBarang(
-      String id, String nama, String harga, String tipe) async {
-    return await barangCollection
-        .document(id)
-        .setData({'nama': nama, 'harga': harga, 'tipe': tipe});
+  Future updateDataBarang(String id, String nama, String harga, String tipe,
+      String kategori) async {
+    return await barangCollection.document(id).setData(
+        {'nama': nama, 'harga': harga, 'tipe': tipe, 'kategori': kategori});
   }
 
   List<Pelanggan> _pelangganListFromSnapshot(QuerySnapshot snapshot) {
@@ -101,5 +100,13 @@ class DatabaseService {
 
   Stream<List<Kategori>> get kategoris {
     return kategoriCollection.snapshots().map(_kategoriListFromSnapshot);
+  }
+
+  Future<List<Kategori>> fetchKategoriList() async {
+    List<Kategori> tes;
+    await kategoriCollection
+        .getDocuments()
+        .then((value) => tes = _kategoriListFromSnapshot(value));
+    return tes;
   }
 }
