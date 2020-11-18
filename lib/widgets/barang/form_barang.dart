@@ -29,7 +29,7 @@ class _FormBarangState extends State<FormBarang> {
       List<Kategori> kategoris = snapshot.data;
       for (var i = 0; i < kategoris.length; i++) {
         kategori.add(DropdownMenuItem(
-            value: kategoris[i].id, child: Text(kategoris[i].nama)));
+            value: kategoris[i].id.toString(), child: Text(kategoris[i].nama)));
       }
       return kategori;
     }
@@ -86,7 +86,7 @@ class _FormBarangState extends State<FormBarang> {
                             value: _currKategori ?? snapshot.data[0].id,
                             items: _buildDropdownItem(snapshot),
                             onChanged: (val) {
-                              setState(() => _currTipe = val);
+                              setState(() => _currKategori = val);
                             },
                           ),
               ),
