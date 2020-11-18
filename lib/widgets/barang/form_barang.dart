@@ -18,7 +18,7 @@ class _FormBarangState extends State<FormBarang> {
   final _formkey = GlobalKey<FormState>();
   String _currNama;
   String _currHarga;
-  String _currTipe;
+  String _currTipe = 'Eceran';
   String _currKategori;
   bool _checkbox = false;
 
@@ -74,22 +74,26 @@ class _FormBarangState extends State<FormBarang> {
               ),
             if (!_checkbox)
               StreamBuilder(
-                stream: DatabaseService().kategoris,
-                builder: (context, snapshot) =>
-                    snapshot.connectionState == ConnectionState.waiting
-                        ? Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: Text('Loading'),
-                          )
-                        : DropdownButtonFormField(
-                            decoration: textInputDecoration,
-                            value: _currKategori ?? snapshot.data[0].id,
-                            items: _buildDropdownItem(snapshot),
-                            onChanged: (val) {
-                              setState(() => _currKategori = val);
-                            },
-                          ),
-              ),
+                  stream: DatabaseService().kategoris,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Text('Loading'),
+                      );
+                    } else {
+                      if (_currKategori == null)
+                        _currKategori = snapshot.data[0].id;
+                      return DropdownButtonFormField(
+                        decoration: textInputDecoration,
+                        value: _currKategori,
+                        items: _buildDropdownItem(snapshot),
+                        onChanged: (val) {
+                          setState(() => _currKategori = val);
+                        },
+                      );
+                    }
+                  }),
             Row(
               children: [
                 Checkbox(
