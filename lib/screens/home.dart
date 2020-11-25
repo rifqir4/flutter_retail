@@ -7,11 +7,11 @@ class Home extends StatelessWidget {
     Menu(route: '/kasir', title: 'Kasir', image: 'assets/images/giveaway.png'),
     Menu(
         route: '/input-barang',
-        title: 'Input Barang',
+        title: 'Data Barang',
         image: 'assets/images/newsletter.png'),
     Menu(
         route: '/input-data',
-        title: 'Input Data Pelanggan',
+        title: 'Data Pelanggan',
         image: 'assets/images/data.png'),
   ];
 
@@ -34,9 +34,17 @@ class Home extends StatelessWidget {
               child: Image.asset('assets/images/logo.png'),
             ),
             Text(
-              'Toko Solo Makmur',
+              'agen gas, beras,',
               style: TextStyle(
-                fontSize: 30,
+                // height: ,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              'dan minuman kemasan',
+              style: TextStyle(
+                fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),

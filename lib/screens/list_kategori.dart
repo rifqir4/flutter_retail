@@ -41,8 +41,8 @@ class ListKategori extends StatelessWidget {
                     ),
                   ),
                   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 200,
-                    childAspectRatio: 3 / 2,
+                    maxCrossAxisExtent: 300,
+                    childAspectRatio: 2 / 2,
                   ),
                 );
               }
