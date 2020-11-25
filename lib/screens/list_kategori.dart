@@ -21,7 +21,7 @@ class ListKategori extends StatelessWidget {
                 return GridView.builder(
                   itemCount: listKategori.length,
                   itemBuilder: (context, index) => Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.all(30.0),
                     child: FlatButton(
                       onPressed: () async {
                         Barang barangs = await Navigator.of(context)
