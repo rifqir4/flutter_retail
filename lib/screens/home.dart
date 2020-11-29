@@ -30,6 +30,7 @@ class Home extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
+              margin: const EdgeInsets.only(top: 30.0, bottom: 20.0),
               width: 300,
               child: Image.asset('assets/images/logo.png'),
             ),
