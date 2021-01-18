@@ -4,9 +4,8 @@ import 'package:retail_apps/services/database.dart';
 
 class PelangganItem extends StatelessWidget {
   final Pelanggan pelanggan;
-  final dynamic delete;
   final dynamic showUpdate;
-  PelangganItem(this.pelanggan, this.delete, this.showUpdate);
+  PelangganItem(this.pelanggan, this.showUpdate);
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +17,7 @@ class PelangganItem extends StatelessWidget {
           children: <Widget>[
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(pelanggan.nama),
-                SizedBox(height: 10),
-                Text(pelanggan.alamat),
-                SizedBox(height: 5),
-                Text(pelanggan.telp)
-              ],
+              children: <Widget>[Text(pelanggan.nama), SizedBox(height: 10), Text(pelanggan.alamat), SizedBox(height: 5), Text(pelanggan.telp)],
             ),
             Row(
               children: <Widget>[
@@ -49,7 +42,6 @@ class PelangganItem extends StatelessWidget {
                     color: Colors.red[100],
                     child: InkWell(
                       onTap: () {
-                        //delete(pelanggan.id);
                         DatabaseService().deleteDataPelanggan(pelanggan.id);
                       },
                       child: Icon(Icons.delete_outline),

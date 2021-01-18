@@ -6,15 +6,11 @@ import 'package:retail_apps/models/kategori.dart';
 import 'package:retail_apps/services/database.dart';
 
 class FormBarang extends StatefulWidget {
-  final dynamic addBarang;
-  FormBarang(this.addBarang);
   @override
-  _FormBarangState createState() => _FormBarangState(addBarang);
+  _FormBarangState createState() => _FormBarangState();
 }
 
 class _FormBarangState extends State<FormBarang> {
-  dynamic addBarang;
-  _FormBarangState(this.addBarang);
   final _formkey = GlobalKey<FormState>();
   String _currNama;
   String _currHarga;
@@ -30,8 +26,7 @@ class _FormBarangState extends State<FormBarang> {
       List<DropdownMenuItem> kategori = [];
       List<Kategori> kategoris = snapshot;
       for (var i = 0; i < kategoris.length; i++) {
-        kategori.add(DropdownMenuItem(
-            value: kategoris[i].id.toString(), child: Text(kategoris[i].nama)));
+        kategori.add(DropdownMenuItem(value: kategoris[i].id.toString(), child: Text(kategoris[i].nama)));
       }
       return kategori;
     }
@@ -113,8 +108,7 @@ class _FormBarangState extends State<FormBarang> {
                 child: Text('Tambah'),
                 onPressed: () {
                   //addBarang(_currNama, _currHarga, _currTipe ?? 'Eceran');
-                  DatabaseService().addDataBarang(_currNama, _currHarga,
-                      _currTipe, _currKategori, 'adada', 0, _checkbox);
+                  DatabaseService().addDataBarang(_currNama, _currHarga, _currTipe, _currKategori, 'adada', 0, _checkbox);
                   Navigator.pop(context);
                 },
               ),

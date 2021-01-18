@@ -3,15 +3,11 @@ import 'package:retail_apps/constant.dart';
 import 'package:retail_apps/services/database.dart';
 
 class FormPelanggan extends StatefulWidget {
-  final dynamic addPelanggan;
-  FormPelanggan(this.addPelanggan);
   @override
-  _FormPelangganState createState() => _FormPelangganState(addPelanggan);
+  _FormPelangganState createState() => _FormPelangganState();
 }
 
 class _FormPelangganState extends State<FormPelanggan> {
-  dynamic addPelanggan;
-  _FormPelangganState(this.addPelanggan);
   final _formkey = GlobalKey<FormState>();
   String _currNama;
   String _currAlamat;
@@ -69,9 +65,7 @@ class _FormPelangganState extends State<FormPelanggan> {
             RaisedButton(
               child: Text('Tambah'),
               onPressed: () async {
-                //addPelanggan(_currNama, _currAlamat, _currTelp, _currKet);
-                await DatabaseService().addDataPelanggan(
-                    _currNama, _currAlamat, _currTelp, _currKet);
+                await DatabaseService().addDataPelanggan(_currNama, _currAlamat, _currTelp, _currKet);
                 Navigator.pop(context);
               },
             ),

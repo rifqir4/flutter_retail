@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:retail_apps/data_dummy.dart';
 import 'package:retail_apps/models/pelanggan.dart';
 import 'package:retail_apps/services/database.dart';
 
@@ -19,7 +18,6 @@ class ListPelangganWrapper extends StatelessWidget {
 class ListPelanggan extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // final pelanggans = DATA_PELANGGANS;
     final pelanggans = Provider.of<List<Pelanggan>>(context);
 
     return Scaffold(
@@ -30,10 +28,7 @@ class ListPelanggan extends StatelessWidget {
                 itemBuilder: (context, index) => Container(
                   padding: EdgeInsets.all(15),
                   height: 50,
-                  decoration: BoxDecoration(
-                      color: Colors.blue[200],
-                      border: Border.all(color: Colors.white),
-                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                  decoration: BoxDecoration(color: Colors.blue[200], border: Border.all(color: Colors.white), borderRadius: BorderRadius.all(Radius.circular(10))),
                   child: InkWell(
                     onTap: () {
                       Navigator.of(context).pop(pelanggans[index]);

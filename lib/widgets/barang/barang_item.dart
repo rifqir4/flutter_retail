@@ -4,9 +4,8 @@ import 'package:retail_apps/services/database.dart';
 
 class BarangItem extends StatelessWidget {
   final Barang barang;
-  final dynamic delete;
   final dynamic showUpdate;
-  BarangItem(this.barang, this.delete, this.showUpdate);
+  BarangItem(this.barang, this.showUpdate);
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +20,7 @@ class BarangItem extends StatelessWidget {
               children: <Widget>[
                 Text(barang.nama),
                 Row(
-                  children: [
-                    Icon(Icons.circle, size: 10, color: Colors.green[500]),
-                    Text(' ${barang.tipe}',
-                        style: TextStyle(color: Colors.green[500]))
-                  ],
+                  children: [Icon(Icons.circle, size: 10, color: Colors.green[500]), Text(' ${barang.tipe}', style: TextStyle(color: Colors.green[500]))],
                 ),
               ],
             ),
@@ -54,7 +49,6 @@ class BarangItem extends StatelessWidget {
                     color: Colors.red[100],
                     child: InkWell(
                       onTap: () {
-                        //delete(barang.id);
                         DatabaseService().deleteDataBarang(barang.id);
                       },
                       child: Icon(Icons.delete_outline),

@@ -12,17 +12,12 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final menu = [
     Menu(route: '/kasir', title: 'Kasir', image: 'assets/images/giveaway.png'),
-    Menu(
-        route: '/input-barang',
-        title: 'Input Barang',
-        image: 'assets/images/newsletter.png'),
-    Menu(
-        route: '/input-data',
-        title: 'Input Data Pelanggan',
-        image: 'assets/images/data.png'),
+    Menu(route: '/input-barang', title: 'Input Barang', image: 'assets/images/newsletter.png'),
+    Menu(route: '/input-data', title: 'Input Data Pelanggan', image: 'assets/images/data.png'),
   ];
 
   bool connection = false;
+  bool connectionIsChecked = false;
 
   Future<void> _checkconnection() async {
     try {
@@ -33,7 +28,9 @@ class _HomeState extends State<Home> {
       print('not connected');
       connection = false;
     }
-    setState(() {});
+    setState(() {
+      connectionIsChecked = true;
+    });
   }
 
   @override
@@ -66,18 +63,12 @@ class _HomeState extends State<Home> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                    width: 300,
-                    child: Image.asset('assets/images/welcome.png'),
-                  ),
-                  Text(
-                    'Toko Ada Serbaguna',
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    width: 250,
+                    child: Image.asset('assets/images/logo.png'),
                   ),
                   SizedBox(height: 10),
                   Container(
+                    padding: EdgeInsets.symmetric(horizontal: 25),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
@@ -86,11 +77,13 @@ class _HomeState extends State<Home> {
                           children: <Widget>[
                             Icon(Icons.place_outlined),
                             SizedBox(width: 6),
-                            Text(
-                              'Jalan Akik 10 Tlogomas',
-                              style: TextStyle(fontSize: 20),
-                              softWrap: true,
-                              overflow: TextOverflow.visible,
+                            Expanded(
+                              child: Text(
+                                'Jl. Kasuari Raya No. 256 Perumnas 1, Kayuringin Jaya, Bekasi Selatan, Kota Bekasi, 17144',
+                                style: TextStyle(fontSize: 20),
+                                softWrap: true,
+                                overflow: TextOverflow.visible,
+                              ),
                             ),
                           ],
                         ),
@@ -101,7 +94,7 @@ class _HomeState extends State<Home> {
                             Icon(Icons.phone_outlined),
                             SizedBox(width: 6),
                             Text(
-                              '081334177037',
+                              '021-8868068',
                               style: TextStyle(fontSize: 20),
                             ),
                           ],
@@ -113,11 +106,13 @@ class _HomeState extends State<Home> {
                   Expanded(
                     flex: 1,
                     child: ListView.builder(
-                        itemCount: menu.length,
-                        itemBuilder: (context, index) => MenuItem(
-                            title: menu[index].title,
-                            image: menu[index].image,
-                            route: menu[index].route)),
+                      itemCount: menu.length,
+                      itemBuilder: (context, index) => MenuItem(
+                        title: menu[index].title,
+                        image: menu[index].image,
+                        route: menu[index].route,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -129,13 +124,17 @@ class _HomeState extends State<Home> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('No Internet Connection'),
-                    RaisedButton(
-                      onPressed: () {
-                        _checkconnection();
-                      },
-                      child: Text('Refresh'),
-                    )
+                    connectionIsChecked
+                        ? {
+                            Text('No Internet Connection'),
+                            RaisedButton(
+                              onPressed: () {
+                                _checkconnection();
+                              },
+                              child: Text('Refresh'),
+                            )
+                          }
+                        : Text('Loading'),
                   ],
                 ),
               ),

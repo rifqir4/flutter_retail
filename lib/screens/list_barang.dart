@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:retail_apps/data_dummy.dart';
 import 'package:retail_apps/models/barang.dart';
-import 'package:retail_apps/screens/kasir.dart';
 import 'package:retail_apps/services/database.dart';
 
 class ListBarangWrapper extends StatelessWidget {
@@ -48,18 +46,18 @@ class _ListBarangState extends State<ListBarang> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               InkWell(
-                onTap: () => _countHandle(true),
-                child: Container(
-                  padding: EdgeInsets.all(2),
-                  child: Icon(Icons.add),
-                ),
-              ),
-              Text('$jumlah'),
-              InkWell(
                 onTap: () => _countHandle(false),
                 child: Container(
                   padding: EdgeInsets.all(2),
                   child: Icon(Icons.remove),
+                ),
+              ),
+              Text('$jumlah'),
+              InkWell(
+                onTap: () => _countHandle(true),
+                child: Container(
+                  padding: EdgeInsets.all(2),
+                  child: Icon(Icons.add),
                 ),
               ),
             ],
@@ -83,11 +81,7 @@ class _ListBarangState extends State<ListBarang> {
   Widget build(BuildContext context) {
     print(widget.kategori);
     List<Barang> barangsFull = Provider.of<List<Barang>>(context);
-    List<Barang> barangs = barangsFull != null
-        ? barangsFull
-            .where((element) => element.kategori == widget.kategori)
-            .toList()
-        : [];
+    List<Barang> barangs = barangsFull != null ? barangsFull.where((element) => element.kategori == widget.kategori).toList() : [];
 
     return Scaffold(
       body: barangs != null
@@ -122,10 +116,7 @@ class _ListBarangState extends State<ListBarang> {
                         SizedBox(height: 5),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text('Rp. ${barangs[index].harga}'),
-                            Text('Tipe: ${barangs[index].tipe}')
-                          ],
+                          children: <Widget>[Text('Rp. ${barangs[index].harga}'), Text('Tipe: ${barangs[index].tipe}')],
                         )
                       ],
                     ),

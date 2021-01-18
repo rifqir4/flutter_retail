@@ -9,35 +9,12 @@ class Kasir extends StatefulWidget {
 }
 
 class _KasirState extends State<Kasir> {
-  // List<Barang> keranjang = [
-  //   Barang(
-  //       id: '23123',
-  //       nama: 'Aqua Galon',
-  //       harga: '25000',
-  //       tipe: 'Grosir',
-  //       image: 'gambar',
-  //       jumlah: 2),
-  //   Barang(
-  //       id: '231231',
-  //       nama: 'Beng Beng',
-  //       harga: '5000',
-  //       tipe: 'Grosir',
-  //       image: 'gambar',
-  //       jumlah: 3)
-  // ];
   List<Barang> keranjang = [];
-  Pelanggan pelanggan = Pelanggan(
-      id: '123',
-      nama: 'Rifqi Radifan',
-      alamat: 'Jl. Ikan Piranha Atas',
-      telp: '081334177037',
-      keterangan: 'Didalem');
+  Pelanggan pelanggan = Pelanggan(id: '123', nama: 'Rifqi Radifan', alamat: 'Jl. Ikan Piranha Atas', telp: '081334177037', keterangan: 'Didalem');
   int total = 0;
 
   void addBarang(Barang barang) {
-    int contain = keranjang.isNotEmpty
-        ? keranjang.indexWhere((element) => element.id == barang.id)
-        : null;
+    int contain = keranjang.isNotEmpty ? keranjang.indexWhere((element) => element.id == barang.id) : null;
     if (contain != null && contain != -1) {
       setState(() {
         keranjang[contain].jumlah = keranjang[contain].jumlah + barang.jumlah;
@@ -109,10 +86,10 @@ class _KasirState extends State<Kasir> {
         backgroundColor: Colors.white,
         actions: [
           FlatButton.icon(
-              onPressed: () => Navigator.pushNamedAndRemoveUntil(
-                  context, '/', (route) => false),
-              icon: Icon(Icons.home_outlined),
-              label: Text('Home'))
+            onPressed: () => Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false),
+            icon: Icon(Icons.home_outlined),
+            label: Text('Home'),
+          )
         ],
       ),
       body: Container(
@@ -153,16 +130,10 @@ class _KasirState extends State<Kasir> {
                       right: 10,
                       child: Container(
                         padding: EdgeInsets.all(2),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.white),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
+                        decoration: BoxDecoration(border: Border.all(color: Colors.white), borderRadius: BorderRadius.all(Radius.circular(10))),
                         child: InkWell(
-                            onTap: () => Navigator.of(context)
-                                    .pushNamed('/list-pelanggan')
-                                    .then((value) {
-                                  if (value != null)
-                                    setState(() => pelanggan = value);
+                            onTap: () => Navigator.of(context).pushNamed('/list-pelanggan').then((value) {
+                                  if (value != null) setState(() => pelanggan = value);
                                 }),
                             child: Icon(
                               Icons.edit,
@@ -181,13 +152,9 @@ class _KasirState extends State<Kasir> {
                 children: <Widget>[
                   RaisedButton(
                     onPressed: () {
-                      Navigator.of(context)
-                          .pushNamed('/list-kategori')
-                          .catchError((e) => print(e))
-                          .then(
+                      Navigator.of(context).pushNamed('/list-kategori').catchError((e) => print(e)).then(
                         (newBarang) {
-                          if (newBarang != null)
-                            addBarang((newBarang as Barang) ?? []);
+                          if (newBarang != null) addBarang((newBarang as Barang) ?? []);
                         },
                       );
                     },
@@ -198,7 +165,9 @@ class _KasirState extends State<Kasir> {
                         Text(
                           "Tambah Barang Baru",
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.white),
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
                         Icon(
                           Icons.add,
@@ -210,28 +179,6 @@ class _KasirState extends State<Kasir> {
                 ],
               ),
             ),
-            // Container(
-            //   child: RaisedButton.icon(
-            //     onPressed: () {
-            //       Navigator.of(context)
-            //           .pushNamed('/list-barang')
-            //           .catchError((e) => print(e))
-            //           .then(
-            //         (newBarang) {
-            //           if (newBarang != null)
-            //             addBarang((newBarang as Barang) ?? []);
-            //         },
-            //       );
-            //     },
-            //     color: Colors.green,
-            //     icon: Icon(Icons.add, color: Colors.white),
-            //     label: Text(
-            //       'Tambah Barang Baru',
-            //       style: TextStyle(
-            //           fontWeight: FontWeight.bold, color: Colors.white),
-            //     ),
-            //   ),
-            // ),
             Expanded(
               flex: 1,
               child: Container(
@@ -241,13 +188,11 @@ class _KasirState extends State<Kasir> {
                       flex: 1,
                       child: ListView.builder(
                         itemCount: keranjang.length,
-                        itemBuilder: (context, index) =>
-                            BelanjaItem(keranjang[index], deleteBarang),
+                        itemBuilder: (context, index) => BelanjaItem(keranjang[index], deleteBarang),
                       ),
                     ),
                     Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[Text('Total:'), Text('Rp. $total')],
@@ -255,12 +200,7 @@ class _KasirState extends State<Kasir> {
                     ),
                     RaisedButton.icon(
                         onPressed: () {
-                          Navigator.of(context).pushNamed('/checkout',
-                              arguments: {
-                                'keranjang': keranjang,
-                                'pelanggan': pelanggan,
-                                'total': total
-                              });
+                          Navigator.of(context).pushNamed('/checkout', arguments: {'keranjang': keranjang, 'pelanggan': pelanggan, 'total': total});
                         },
                         icon: Icon(Icons.shopping_cart_outlined),
                         label: Text('Selesaikan Pembelanjaan'))

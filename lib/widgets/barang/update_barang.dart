@@ -7,16 +7,12 @@ import 'package:retail_apps/services/database.dart';
 
 class UpdateBarang extends StatefulWidget {
   final Barang barang;
-  final update;
-  UpdateBarang(this.barang, this.update);
+  UpdateBarang(this.barang);
   @override
-  _UpdateBarangState createState() => _UpdateBarangState(barang, update);
+  _UpdateBarangState createState() => _UpdateBarangState();
 }
 
 class _UpdateBarangState extends State<UpdateBarang> {
-  final Barang barang;
-  dynamic update;
-  _UpdateBarangState(this.barang, this.update);
   final _formkey = GlobalKey<FormState>();
   String _currNama;
   String _currHarga;
@@ -31,14 +27,13 @@ class _UpdateBarangState extends State<UpdateBarang> {
       List<DropdownMenuItem> kategori = [];
       List<Kategori> kategoris = snapshot;
       for (var i = 0; i < kategoris.length; i++) {
-        kategori.add(DropdownMenuItem(
-            value: kategoris[i].id.toString(), child: Text(kategoris[i].nama)));
+        kategori.add(DropdownMenuItem(value: kategoris[i].id.toString(), child: Text(kategoris[i].nama)));
       }
       return kategori;
     }
 
     if (kategorisku != null) {
-      if (_currKategori == null) _currKategori = barang.kategori;
+      if (_currKategori == null) _currKategori = widget.barang.kategori;
 
       return Form(
           key: _formkey,
@@ -47,14 +42,13 @@ class _UpdateBarangState extends State<UpdateBarang> {
               Text("Edit Barang", style: TextStyle(fontSize: 18)),
               SizedBox(height: 10),
               TextFormField(
-                initialValue: barang.nama,
-                decoration:
-                    textInputDecoration.copyWith(hintText: 'Nama Barang'),
+                initialValue: widget.barang.nama,
+                decoration: textInputDecoration.copyWith(hintText: 'Nama Barang'),
                 onChanged: (val) => setState(() => _currNama = val),
               ),
               SizedBox(height: 10),
               TextFormField(
-                initialValue: barang.harga,
+                initialValue: widget.barang.harga,
                 decoration: textInputDecoration.copyWith(hintText: 'Harga'),
                 onChanged: (val) => setState(() => _currHarga = val),
               ),
@@ -70,7 +64,7 @@ class _UpdateBarangState extends State<UpdateBarang> {
               SizedBox(height: 10),
               DropdownButtonFormField(
                 decoration: textInputDecoration,
-                value: _currTipe ?? barang.tipe,
+                value: _currTipe ?? widget.barang.tipe,
                 items: <DropdownMenuItem>[
                   DropdownMenuItem(value: 'Eceran', child: Text('Eceran')),
                   DropdownMenuItem(value: 'Grosir', child: Text('Grosir')),
@@ -85,12 +79,7 @@ class _UpdateBarangState extends State<UpdateBarang> {
                 onPressed: () async {
                   // update(barang.id, _currNama ?? barang.nama,
                   //     _currHarga ?? barang.harga, _currTipe ?? barang.tipe);
-                  await DatabaseService().updateDataBarang(
-                      barang.id,
-                      _currNama ?? barang.nama,
-                      _currHarga ?? barang.harga,
-                      _currTipe ?? barang.tipe,
-                      _currKategori ?? barang.kategori);
+                  await DatabaseService().updateDataBarang(widget.barang.id, _currNama ?? widget.barang.nama, _currHarga ?? widget.barang.harga, _currTipe ?? widget.barang.tipe, _currKategori ?? widget.barang.kategori);
                   Navigator.pop(context);
                 },
               ),

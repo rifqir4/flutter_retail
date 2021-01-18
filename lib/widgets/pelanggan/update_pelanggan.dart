@@ -5,17 +5,12 @@ import 'package:retail_apps/services/database.dart';
 
 class UpdatePelanggan extends StatefulWidget {
   final Pelanggan pelanggan;
-  final update;
-  UpdatePelanggan(this.pelanggan, this.update);
+  UpdatePelanggan(this.pelanggan);
   @override
-  _UpdatePelangganState createState() =>
-      _UpdatePelangganState(pelanggan, update);
+  _UpdatePelangganState createState() => _UpdatePelangganState();
 }
 
 class _UpdatePelangganState extends State<UpdatePelanggan> {
-  final Pelanggan pelanggan;
-  final update;
-  _UpdatePelangganState(this.pelanggan, this.update);
   final _formkey = GlobalKey<FormState>();
   String _currNama;
   String _currAlamat;
@@ -31,27 +26,25 @@ class _UpdatePelangganState extends State<UpdatePelanggan> {
             Text("Edit Data Pelanggan", style: TextStyle(fontSize: 18)),
             SizedBox(height: 10),
             TextFormField(
-              initialValue: pelanggan.nama,
-              decoration:
-                  textInputDecoration.copyWith(hintText: 'Nama Pelanggan'),
+              initialValue: widget.pelanggan.nama,
+              decoration: textInputDecoration.copyWith(hintText: 'Nama Pelanggan'),
               onChanged: (val) => setState(() => _currNama = val),
             ),
             SizedBox(height: 10),
             TextFormField(
-              initialValue: pelanggan.alamat,
-              decoration:
-                  textInputDecoration.copyWith(hintText: 'Alamat Pelanggan'),
+              initialValue: widget.pelanggan.alamat,
+              decoration: textInputDecoration.copyWith(hintText: 'Alamat Pelanggan'),
               onChanged: (val) => setState(() => _currAlamat = val),
             ),
             SizedBox(height: 10),
             TextFormField(
-              initialValue: pelanggan.telp,
+              initialValue: widget.pelanggan.telp,
               decoration: textInputDecoration.copyWith(hintText: 'Nomor Telp'),
               onChanged: (val) => setState(() => _currTelp = val),
             ),
             SizedBox(height: 10),
             TextFormField(
-              initialValue: pelanggan.keterangan,
+              initialValue: widget.pelanggan.keterangan,
               decoration: textInputDecoration.copyWith(hintText: 'Keterangan'),
               onChanged: (val) => setState(() => _currKet = val),
             ),
@@ -59,19 +52,7 @@ class _UpdatePelangganState extends State<UpdatePelanggan> {
             RaisedButton(
               child: Text('Update'),
               onPressed: () {
-                // update(
-                //     pelanggan.id,
-                //     _currNama ?? pelanggan.nama,
-                //     _currAlamat ?? pelanggan.alamat,
-                //     _currTelp ?? pelanggan.telp,
-                //     _currKet ?? pelanggan.keterangan);
-
-                DatabaseService().updateDataPelanggan(
-                    pelanggan.id,
-                    _currNama ?? pelanggan.nama,
-                    _currAlamat ?? pelanggan.alamat,
-                    _currTelp ?? pelanggan.telp,
-                    _currKet ?? pelanggan.keterangan);
+                DatabaseService().updateDataPelanggan(widget.pelanggan.id, _currNama ?? widget.pelanggan.nama, _currAlamat ?? widget.pelanggan.alamat, _currTelp ?? widget.pelanggan.telp, _currKet ?? widget.pelanggan.keterangan);
                 Navigator.pop(context);
               },
             ),
